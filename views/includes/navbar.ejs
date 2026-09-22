@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top py-2 shadow-xs">
+    <div class="container">
+        <!-- Brand Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark fs-4" href="/">
+            <div class="brand-icon-wrapper">
+                <i class="fa-solid fa-compass brand-icon"></i>
+            </div>
+            <span class="brand-name">Wanderlust</span>
+        </a>
+
+        <!-- Mobile Toggle Button -->
+        <button 
+            class="navbar-toggler border-0 shadow-none px-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarMain" 
+            aria-controls="navbarMain" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <!-- Center Search Bar -->
+            <form action="/listings" method="GET" class="d-flex mx-auto my-2 my-lg-0 navbar-search-box">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        class="form-control rounded-pill-start border-end-0 py-2 px-3 search-input" 
+                        placeholder="Search destinations, villas, lofts..." 
+                        aria-label="Search"
+                    />
+                    <button class="btn btn-primary rounded-pill-end px-3" type="submit" aria-label="Submit Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Navigation Links -->
+            <div class="navbar-nav align-items-lg-center gap-1 gap-lg-2 ms-lg-auto">
+                <a class="nav-link px-3 rounded-pill <%= typeof currPath !== 'undefined' && currPath === '/' ? 'active fw-semibold' : '' %>" href="/">
+                    Home
+                </a>
+                <a class="nav-link px-3 rounded-pill <%= typeof currPath !== 'undefined' && currPath.startsWith('/listings') && currPath !== '/listings/new' ? 'active fw-semibold' : '' %>" href="/listings">
+                    Explore Stays
+                </a>
+                <a class="btn btn-outline-primary rounded-pill px-3 py-2 d-inline-flex align-items-center gap-2 fw-semibold ms-lg-2 mt-2 mt-lg-0" href="/listings/new">
+                    <i class="fa-solid fa-circle-plus"></i> Add New Place
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

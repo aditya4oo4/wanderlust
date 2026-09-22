@@ -1,0 +1,305 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container py-4">
+    <!-- Breadcrumb & Title Section -->
+    <div class="mb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-2 small">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Home</a></li>
+                <li class="breadcrumb-item"><a href="/listings" class="text-decoration-none text-muted">Stays</a></li>
+                <li class="breadcrumb-item active text-dark fw-medium" aria-current="page"><%= listing.title %></li>
+            </ol>
+        </nav>
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
+            <div>
+                <h1 class="display-6 fw-bold text-dark mb-1"><%= listing.title %></h1>
+                <div class="d-flex flex-wrap align-items-center gap-3 text-muted small">
+                    <span><i class="fa-solid fa-star text-warning"></i> <strong>4.92</strong> (<%= listing.reviews ? listing.reviews.length : 0 %> reviews)</span>
+                    <span>•</span>
+                    <span><i class="fa-solid fa-location-dot text-primary me-1"></i> <%= listing.location %>, <%= listing.country %></span>
+                    <span>•</span>
+                    <span class="badge bg-primary-soft text-primary rounded-pill px-3 py-1"><%= listing.category || 'Trending' %></span>
+                </div>
+            </div>
+            <!-- Quick Share/Save Actions -->
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');">
+                    <i class="fa-solid fa-share-nodes me-1"></i> Share
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Image Showcase -->
+    <div class="show-image-container rounded-4 overflow-hidden mb-4 position-relative shadow-sm">
+        <img 
+            src="<%= listing.image?.url || 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800' %>" 
+            alt="<%= listing.title %>" 
+            class="show-main-img w-100" 
+        />
+        <span class="badge bg-dark-glass position-absolute bottom-0 end-0 m-3 px-3 py-2 rounded-pill text-white">
+            <i class="fa-solid fa-camera me-1"></i> Verified Wanderlust Stay
+        </span>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <!-- Left Column: Details, Amenities, Reviews -->
+        <div class="col-lg-8">
+            <!-- Host Info Header -->
+            <div class="d-flex justify-content-between align-items-center pb-4 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="host-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-4">
+                        <%= listing.title.charAt(0).toUpperCase() %>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">Entire villa hosted by Wanderlust Host</h4>
+                        <small class="text-muted">Superhost • 4+ years hosting on Wanderlust</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place Highlights -->
+            <div class="py-4 border-bottom">
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <i class="fa-solid fa-medal text-primary fs-4 mt-1"></i>
+                    <div>
+                        <h6 class="fw-bold mb-0">Superhost Experience</h6>
+                        <small class="text-muted">Superhosts are experienced, highly rated hosts committed to great stays.</small>
+                    </div>
+                </div>
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <i class="fa-solid fa-key text-primary fs-4 mt-1"></i>
+                    <div>
+                        <h6 class="fw-bold mb-0">Self Check-in</h6>
+                        <small class="text-muted">Check yourself in effortlessly with the secure keypad.</small>
+                    </div>
+                </div>
+                <div class="d-flex align-items-start gap-3">
+                    <i class="fa-solid fa-calendar-xmark text-primary fs-4 mt-1"></i>
+                    <div>
+                        <h6 class="fw-bold mb-0">Free Cancellation</h6>
+                        <small class="text-muted">Cancel up to 48 hours before check-in for a full refund.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About This Place -->
+            <div class="py-4 border-bottom">
+                <h4 class="fw-bold mb-3">About this place</h4>
+                <p class="text-secondary leading-relaxed fs-6">
+                    <%= listing.description %>
+                </p>
+            </div>
+
+            <!-- What This Place Offers / Amenities -->
+            <div class="py-4 border-bottom">
+                <h4 class="fw-bold mb-3">What this place offers</h4>
+                <div class="row row-cols-2 g-3">
+                    <div class="col d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-wifi text-secondary fs-5"></i>
+                        <span>High-speed Wi-Fi (500 Mbps)</span>
+                    </div>
+                    <div class="col d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-water-ladder text-secondary fs-5"></i>
+                        <span>Infinity Pool</span>
+                    </div>
+                    <div class="col d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-kitchen-set text-secondary fs-5"></i>
+                        <span>Fully Equipped Kitchen</span>
+                    </div>
+                    <div class="col d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-square-parking text-secondary fs-5"></i>
+                        <span>Free Parking on premises</span>
+                    </div>
+                    <div class="col d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-snowflake text-secondary fs-5"></i>
+                        <span>Air Conditioning & Heating</span>
+                    </div>
+                    <div class="col d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-tv text-secondary fs-5"></i>
+                        <span>65" 4K Smart TV</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Host Actions (Edit & Delete Listing) -->
+            <div class="py-4 border-bottom d-flex flex-wrap gap-2">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark rounded-pill px-4">
+                    <i class="fa-solid fa-pen-to-square me-2"></i> Edit Listing
+                </a>
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline" onsubmit="return confirm('Are you sure you want to permanently delete this listing?');">
+                    <button type="submit" class="btn btn-outline-danger rounded-pill px-4">
+                        <i class="fa-solid fa-trash-can me-2"></i> Delete Listing
+                    </button>
+                </form>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="py-4">
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <i class="fa-solid fa-star text-warning fs-4"></i>
+                    <h3 class="fw-bold mb-0">Guest Reviews (<%= listing.reviews ? listing.reviews.length : 0 %>)</h3>
+                </div>
+
+                <!-- Review Form Card -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-light-subtle">
+                    <h5 class="fw-bold mb-3">Leave a Review</h5>
+                    <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+                        <!-- Interactive Star Rating -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Rating</label>
+                            <div class="star-rating-widget d-flex align-items-center gap-2">
+                                <div class="stars-picker" id="starPicker">
+                                    <i class="fa-solid fa-star star-btn active" data-val="1"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-val="2"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-val="3"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-val="4"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-val="5"></i>
+                                </div>
+                                <span class="fw-bold ms-2 text-warning" id="ratingDisplay">5 Stars</span>
+                                <input type="hidden" name="review[rating]" id="ratingInput" value="5" required />
+                            </div>
+                        </div>
+
+                        <!-- Review Author -->
+                        <div class="mb-3">
+                            <label for="reviewAuthor" class="form-label fw-semibold">Your Name</label>
+                            <input 
+                                type="text" 
+                                name="review[author]" 
+                                id="reviewAuthor" 
+                                class="form-control rounded-3" 
+                                placeholder="e.g. Sarah Jenkins" 
+                            />
+                        </div>
+
+                        <!-- Review Comment -->
+                        <div class="mb-3">
+                            <label for="reviewComment" class="form-label fw-semibold">Your Experience</label>
+                            <textarea 
+                                name="review[comment]" 
+                                id="reviewComment" 
+                                rows="4" 
+                                class="form-control rounded-3" 
+                                placeholder="Share details of your own experience at this place..." 
+                                required
+                            ></textarea>
+                            <div class="invalid-feedback">Please write a comment for your review.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold">
+                            <i class="fa-solid fa-paper-plane me-2"></i> Submit Review
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Reviews Grid -->
+                <% if (listing.reviews && listing.reviews.length > 0) { %>
+                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                        <% for(let review of listing.reviews) { %>
+                            <div class="col">
+                                <div class="card h-100 border shadow-xs rounded-4 p-3 bg-white">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="avatar-sm bg-secondary-subtle text-dark rounded-circle d-flex align-items-center justify-content-center fw-bold">
+                                                <%= review.author ? review.author.charAt(0).toUpperCase() : 'T' %>
+                                            </div>
+                                            <div>
+                                                <h6 class="fw-bold mb-0"><%= review.author || 'Traveler' %></h6>
+                                                <small class="text-muted">
+                                                    <%= review.createdAt ? new Date(review.createdAt).toLocaleDateString("en-US", { month: 'short', year: 'numeric' }) : 'Recent' %>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="stars-display text-warning small">
+                                            <% for(let i = 1; i <= 5; i++) { %>
+                                                <i class="fa-<%= i <= review.rating ? 'solid' : 'regular' %> fa-star"></i>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-secondary small flex-grow-1 mb-3">
+                                        "<%= review.comment %>"
+                                    </p>
+                                    <div class="d-flex justify-content-end">
+                                        <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" onsubmit="return confirm('Delete this review?');">
+                                            <button type="submit" class="btn btn-sm btn-link text-danger text-decoration-none p-0">
+                                                <i class="fa-solid fa-trash-can me-1"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                <% } else { %>
+                    <div class="text-center py-4 bg-light rounded-4 border">
+                        <i class="fa-regular fa-comment-dots fa-2xl text-muted mb-3"></i>
+                        <p class="text-muted mb-0">No reviews yet. Be the first to leave a review for this place!</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <!-- Right Column: Sticky Booking Widget -->
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 100px; z-index: 10;">
+                <div class="card border-0 shadow-lg rounded-4 p-4 bg-white">
+                    <div class="d-flex justify-content-between align-items-baseline mb-3">
+                        <div>
+                            <span class="fs-3 fw-bold text-dark">&#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : 0 %></span>
+                            <span class="text-muted"> / night</span>
+                        </div>
+                        <div class="small fw-semibold text-muted">
+                            <i class="fa-solid fa-star text-warning"></i> 4.92
+                        </div>
+                    </div>
+
+                    <!-- Date selection mock -->
+                    <div class="border rounded-3 p-3 mb-3 bg-light">
+                        <div class="row g-2 small">
+                            <div class="col-6 border-end">
+                                <span class="text-muted d-block fw-semibold text-uppercase font-xs">Check-in</span>
+                                <span class="fw-bold text-dark">Tomorrow</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="text-muted d-block fw-semibold text-uppercase font-xs">Checkout</span>
+                                <span class="fw-bold text-dark">In 5 Days</span>
+                            </div>
+                        </div>
+                        <hr class="my-2" />
+                        <div>
+                            <span class="text-muted d-block fw-semibold text-uppercase font-xs">Guests</span>
+                            <span class="fw-bold text-dark">2 guests, 1 room</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg w-100 rounded-pill mb-3 fw-bold shadow-sm" onclick="alert('Booking reservation demo: This stay is available for booking on Wanderlust!');">
+                        Reserve Now
+                    </button>
+                    <p class="text-center text-muted small mb-3">You won't be charged yet</p>
+
+                    <!-- Price breakdown -->
+                    <div class="price-breakdown small text-muted">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>&#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : 0 %> x 5 nights</span>
+                            <span class="text-dark">&#8377; <%= listing.price ? (listing.price * 5).toLocaleString("en-IN") : 0 %></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Wanderlust Service fee</span>
+                            <span class="text-dark">&#8377; <%= listing.price ? Math.round(listing.price * 0.1).toLocaleString("en-IN") : 0 %></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Taxes & GST (18%)</span>
+                            <span class="text-dark">&#8377; <%= listing.price ? Math.round(listing.price * 5 * 0.18).toLocaleString("en-IN") : 0 %></span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between fs-6 fw-bold text-dark">
+                            <span>Total</span>
+                            <span class="text-primary">&#8377; <%= listing.price ? Math.round(listing.price * 5 * 1.18 + listing.price * 0.1).toLocaleString("en-IN") : 0 %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "name": "wanderlust",
+  "version": "1.0.0",
+  "description": "Wanderlust - Find and host extraordinary stays around the world",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "seed": "node init/index.js",
+    "test": "node test_routes.js"
+  },
+  "keywords": [
+    "wanderlust",
+    "travel",
+    "vacation-rentals",
+    "accommodations"
+  ],
+  "author": "Aditya Shaurya saini",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "ejs-mate": "^4.0.0",
+    "express": "^5.2.1",
+    "joi": "^18.2.3",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.6.3"
+  }
+}
