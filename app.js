@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 // Database connection
-const MONGO_URL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = "mongodb+srv://adityasaini3339_db_user:4KLNRrdWfkS9U0eQ@wanderlust.vvszh0x.mongodb.net/wanderlust";
 
 async function main() {
     await mongoose.connect(MONGO_URL);
@@ -63,9 +63,7 @@ const validateReview = (req, res, next) => {
     }
 };
 
-// ==========================================
-// ROUTES
-// ==========================================
+
 
 // 1. Home Page Route
 app.get(
@@ -76,7 +74,6 @@ app.get(
     })
 );
 
-// 2. Listings Index Route (Supports Search & Category Filter)
 app.get(
     "/listings",
     wrapAsync(async (req, res) => {
